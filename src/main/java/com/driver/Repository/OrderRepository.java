@@ -1,5 +1,7 @@
-package com.driver;
+package com.driver.Repository;
 
+import com.driver.DeliveryPartner;
+import com.driver.Order;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -16,12 +18,15 @@ public class OrderRepository {
     Map<String, List<String>> deliveryPartnerOrderListMap  = new HashMap<>();
 
     public void addOrder(Order order) {
-        orderMap.put(order.getId(), order);
-        unassignedOrders.add(order.getId());
+        if(!orderMap.containsKey(order.getId())) {
+            orderMap.put(order.getId(), order);
+            unassignedOrders.add(order.getId());
+        }
     }
 
     public void addPartner(String partnerId, DeliveryPartner deliveryPartner) {
-        deliveryPartnerMap.put(partnerId, deliveryPartner);
+        if(!deliveryPartnerMap.containsKey(partnerId))
+            deliveryPartnerMap.put(partnerId, deliveryPartner);
     }
 
     public void createOrderPartnerPair(String orderId, String partnerId) {
