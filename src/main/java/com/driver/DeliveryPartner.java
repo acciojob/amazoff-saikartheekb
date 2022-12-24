@@ -1,5 +1,8 @@
 package com.driver;
 
+import lombok.Data;
+
+@Data
 public class DeliveryPartner {
 
     private String id;
